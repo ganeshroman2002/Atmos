@@ -21,7 +21,7 @@ def main():
         if query.lower() == "exit":
             break
 
-        expert = route_query(query)
+        expert, confidence = route_query(query)
 
         if expert == "greeting_expert":
             response = handle_greeting(query)
@@ -29,8 +29,10 @@ def main():
             response = handle_math(query)
         elif expert == "farewell_expert":
             response = handle_farewell(query)
-        else:
+        else: # Unclassified
             response = "Sorry, I don't have an expert for that."
+            with open("multi_model_system/unclassified_queries.txt", "a") as f:
+                f.write(query + "\n")
 
         print(response)
 

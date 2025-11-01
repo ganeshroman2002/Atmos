@@ -1,0 +1,13 @@
+query,expert
+"hello",greeting_expert
+"hi there",greeting_expert
+"good morning",greeting_expert
+"hey",greeting_expert
+"what is 5+5",math_expert
+"calculate 10 * 2",math_expert
+"what's 100 / 4",math_expert
+"compute 8-3",math_expert
+"goodbye",farewell_expert
+"see you later",farewell_expert
+"bye bye",farewell_expert
+"ciao",farewell_expert
