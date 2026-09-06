@@ -2,46 +2,52 @@
 
 ## Test Cases
 
-| TC ID | Module | Test Scenario | Precondition | Test Steps | Test Data | Expected Result | Priority | Status |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TC-SU-001 | Sign Up | Successful registration | User is on Sign Up page | Enter valid mandatory data; submit | Valid unique email/mobile, strong password | Account is created and success confirmation/redirect is shown | High | Not Run |
-| TC-SU-002 | Sign Up | Required field validation | Sign Up page open | Leave mandatory fields blank; submit | Blank | Validation is shown for each required field | High | Not Run |
-| TC-SU-003 | Sign Up | Invalid email format | Sign Up page open | Enter invalid email; submit | abc@ | Email format validation is shown | Medium | Not Run |
-| TC-SU-004 | Sign Up | Invalid mobile format | Sign Up page open | Enter invalid mobile; submit | 123 | Mobile validation is shown | Medium | Not Run |
-| TC-SU-005 | Sign Up | Password policy | Sign Up page open | Enter weak password | 12345 | Password policy message is shown | High | Not Run |
-| TC-SU-006 | Sign Up | Confirm password mismatch | Sign Up page open | Enter different password/confirm password | Pass@123 / Pass@124 | Mismatch validation is shown | High | Not Run |
-| TC-FP-001 | Forgot Password | Registered email/mobile | Forgot Password page open | Enter registered identifier and submit | Registered email/mobile | OTP/reset flow is initiated | High | Not Run |
-| TC-FP-002 | Forgot Password | Unregistered identifier | Forgot Password page open | Enter unregistered identifier | unknown@example.com | Appropriate error message is shown | High | Not Run |
-| TC-FP-003 | Forgot Password | Invalid format | Forgot Password page open | Enter invalid identifier | abc@ | Validation is shown | Medium | Not Run |
-| TC-OTP-001 | Sign with OTP | Valid OTP | OTP screen open | Enter valid OTP and continue | Valid OTP | User is authenticated and redirected | High | Not Run |
-| TC-OTP-002 | Sign with OTP | Invalid OTP | OTP screen open | Enter incorrect OTP | 000000 | Error message is shown; user is not authenticated | High | Not Run |
-| TC-OTP-003 | Sign with OTP | Expired OTP | OTP screen open | Use expired OTP | Expired OTP | Expiry message is shown; authentication fails | High | Not Run |
-| TC-OTP-004 | Sign with OTP | Resend OTP | OTP screen open | Click Resend OTP | N/A | New OTP is generated/sent and resend control behaves correctly | Medium | Not Run |
-| TC-LG-001 | Login | Valid credentials | Login page open | Enter valid email/password; click Login | Registered credentials | User logs in successfully and dashboard is displayed | High | Passed |
-| TC-LG-002 | Login | Invalid credentials | Login page open | Enter invalid credentials; click Login | invalid@example.com / WrongPassword@123 | Authentication fails and error is displayed | High | Passed |
-| TC-LG-003 | Login | Blank fields | Login page open | Submit without credentials | Blank | Required field validation is shown | High | Not Run |
-| TC-LG-004 | Login | Invalid email format | Login page open | Enter malformed email | abc@ | Email validation is shown | Medium | Not Run |
-| TC-LG-005 | Login | Password masking | Login page open | Type password | Password value | Password is masked | Low | Not Run |
-| TC-LG-006 | Login | Logout/session | User logged in | Logout and use browser back | N/A | Protected page is not accessible without authentication | High | Not Run |
+| TC ID | Module | Test Case | Steps | Test Data | Expected Result |
+| --- | --- | --- | --- | --- | --- |
+| TC01 | Sign Up | Check signup with valid details | Open Signup page → enter all valid details → click Signup | Valid name, email, mobile, password | User should be registered successfully |
+| TC02 | Sign Up | Check signup with blank fields | Open Signup page → leave all fields blank → click Signup | Blank | Required field message should come |
+| TC03 | Sign Up | Check signup with wrong email | Enter wrong email format → click Signup | abc@ | Email validation message should come |
+| TC04 | Sign Up | Check signup with wrong mobile number | Enter invalid mobile number | 12345 | Mobile number validation should come |
+| TC05 | Sign Up | Check password validation | Enter a weak/invalid password | 12345 | Password validation message should come |
+| TC06 | Sign Up | Check confirm password | Enter different password and confirm password | Test@123 / Test@456 | Password mismatch message should come |
+| TC07 | Sign Up | Check signup with already registered email | Enter an email which is already registered | Existing email | Proper error message should come |
+| TC08 | Forgot Password | Check forgot password with registered email | Open Forgot Password → enter registered email → submit | Registered email | OTP/reset process should start |
+| TC09 | Forgot Password | Check forgot password with wrong email | Enter email which is not registered | test123@gmail.com | Proper error message should come |
+| TC10 | Forgot Password | Check forgot password with blank email | Leave email blank → submit | Blank | Required field message should come |
+| TC11 | Forgot Password | Check wrong email format | Enter invalid email format | abc@ | Email validation should come |
+| TC12 | Forgot Password | Check reset password with valid OTP | Enter valid OTP and new password | Valid OTP | Password should be changed successfully |
+| TC13 | Sign with OTP | Check login with valid OTP | Enter mobile/email → enter valid OTP → submit | Valid OTP | User should login successfully |
+| TC14 | Sign with OTP | Check login with wrong OTP | Enter wrong OTP → submit | 000000 | Error message should come |
+| TC15 | Sign with OTP | Check OTP with blank field | Leave OTP blank → submit | Blank | Required field message should come |
+| TC16 | Sign with OTP | Check expired OTP | Enter expired OTP | Expired OTP | OTP expired message should come |
+| TC17 | Sign with OTP | Check resend OTP | Click Resend OTP | N/A | New OTP should be sent |
+| TC18 | Sign with OTP | Check OTP with alphabets | Enter letters instead of OTP | abcdef | OTP should not be accepted |
+| TC19 | Login | Check login with valid credentials | Enter correct email and password → click Login | Valid credentials | User should login and dashboard should open |
+| TC20 | Login | Check login with wrong password | Enter correct email and wrong password | Wrong password | Error message should come |
+| TC21 | Login | Check login with wrong email | Enter wrong email and password | Wrong email | Error message should come |
+| TC22 | Login | Check login with blank fields | Leave email and password blank → click Login | Blank | Required field messages should come |
+| TC23 | Login | Check login with wrong email format | Enter invalid email format | abc@ | Email validation should come |
+| TC24 | Login | Check password is hidden | Enter password in password field | Test@123 | Password should be hidden |
+| TC25 | Login | Check login button | Open login page and check Login button | N/A | Login button should be visible and clickable |
 
 ## Field Validation
 
 | Module | Field | Validation |
 | --- | --- | --- |
-| Sign Up | Name | Required; alphabetic/allowed characters; sensible length; trim leading/trailing spaces |
-| Sign Up | Email | Required; valid email format; maximum length; reject malformed addresses |
-| Sign Up | Mobile | Required; numeric; valid country/length; reject letters and invalid length |
-| Sign Up | Password | Required; minimum length; complexity policy; should be masked |
-| Sign Up | Confirm Password | Required; must exactly match password |
-| Forgot Password | Email/Mobile | Required; valid email/mobile format; registered identifier should proceed |
-| Sign with OTP | OTP | Required; numeric; exact OTP length; reject invalid/expired OTP |
-| Sign with OTP | Resend OTP | Cooldown/rate-limit; resend generates a new OTP; old OTP behavior should be defined |
-| Login | Email/Mobile | Required; valid email/mobile format; trim spaces |
-| Login | Password | Required; masked; invalid credentials must not authenticate |
+| Sign Up | Name | Should not be blank and should accept valid name |
+| Sign Up | Email | Should accept valid email format |
+| Sign Up | Mobile | Should accept valid mobile number |
+| Sign Up | Password | Should follow password rules |
+| Sign Up | Confirm Password | Should match password |
+| Forgot Password | Email | Should accept valid registered email |
+| OTP | OTP | Should accept correct number of digits only |
+| Login | Email | Should accept valid email/mobile |
+| Login | Password | Should not be blank and should be hidden |
 
-## Bugs & Observations
+## Bugs / Observations
 
-| ID | Area | Observation | Evidence | Severity | Status |
-| --- | --- | --- | --- | --- | --- |
-| API-001 | Login API | Invalid credentials return HTTP 200 while JSON indicates success=false. Confirm expected API contract before logging as a defect. | Candidate run showed 200 OK with success=false and invalid-credentials message. | Low/Medium | Observation |
-| API-002 | Authentication | Do not store actual referral token or password in repository. | Security best practice for test artifacts. | High | Action Required |
+| Bug ID | Module | Bug / Observation | Expected | Actual | Severity | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| BUG01 | Login API | Invalid login gives HTTP 200 even though login is not successful | Invalid login should return the expected error HTTP status according to API design | API returns 200 with success=false | Medium | Observed |
+
+**Note:** Only actual observations are listed as bugs. Other test cases should be marked after execution.
